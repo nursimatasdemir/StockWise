@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "NPJ1eYJpzo4=",
+  "dgSpecHash": "y2RpMpgcbP8=",
   "success": true,
   "projectFilePath": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise.csproj",
   "expectedPackageFiles": [
     "/Users/nursimatasdemir/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/nursimatasdemir/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "/Users/nursimatasdemir/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/nursimatasdemir/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
     "/Users/nursimatasdemir/.nuget/packages/fluentvalidation.aspnetcore/11.3.1/fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
     "/Users/nursimatasdemir/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.11.0/fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",

@@ -22,8 +22,13 @@ public class TokenService
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Role, user.role)
         };
+        var keyFromConfig = _config["Jwt:Key"];
+        if (string.IsNullOrEmpty(keyFromConfig))
+        {
+            throw new InvalidOperationException("Key is not configured");
+        }
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyFromConfig));
         
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken(
             claims: claims,

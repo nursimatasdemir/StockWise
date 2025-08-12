@@ -162,3 +162,13 @@
 /Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/nursimatasdemir/RiderProjects/StockWise/obj/Debug/net8.0/StockWise.sourcelink.json
