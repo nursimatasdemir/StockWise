@@ -1,9 +1,8 @@
 namespace StockWise.DTOs.Stock;
 
-public class StockDTO
+public class UpdateStockDTO
 {
-    public int Id { get; set; }
-    public string Symbol { get; set; }
+    public string Symbol { get; set; } = string.Empty;
     public double Quantity { get; set; }
     public double BuyPrice { get; set; }
 }
