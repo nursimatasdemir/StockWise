@@ -28,6 +28,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("DataSource=StockWise.db"));
 
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddHttpClient<StockWise.Services.StockPriceService>();
 
 builder.Services.AddAuthentication(options =>
 {

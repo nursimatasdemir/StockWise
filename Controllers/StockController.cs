@@ -5,6 +5,7 @@ using StockWise.Data;
 using StockWise.DTOs.Stock;
 using StockWise.Models;
 using System.Security.Claims;
+using StockWise.Services;
 
 namespace StockWise.Controllers;
 
@@ -14,10 +15,12 @@ namespace StockWise.Controllers;
 public class StockController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly StockPriceService _priceService;
 
-    public StockController(ApplicationDbContext context)
+    public StockController(ApplicationDbContext context, StockPriceService priceService)
     {
         _context = context;
+        _priceService = priceService;
     }
     
     private string GetUserName() => User.FindFirstValue(ClaimTypes.Name) ?? "";
@@ -51,6 +54,15 @@ public class StockController : ControllerBase
             Quantity = stock.Quantity,
             BuyPrice = stock.BuyPrice,
         });
+    }
+
+    [HttpGet("price/{symbol}")]
+    public async Task<ActionResult> GetPrice(string symbol)
+    {
+        var price = await _priceService.GetCurrentPrice(symbol);
+        if(price == null)
+            return NotFound(new {message = "Price not found for this symbol", symbol});
+        return Ok(new { Symbol = symbol, CurrentPrice = price });
     }
 
     [HttpGet("portfolio/{portfolioId:int}")]

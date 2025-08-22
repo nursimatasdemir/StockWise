@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using SQLitePCL;
 using StockWise.DTOs.Portfolio;
+using StockWise.Services;
 
 namespace StockWise.Controllers;
 
@@ -88,42 +89,72 @@ public class PortfolioController : ControllerBase
         return Ok(dto);
     }
 
-    [HttpGet("{id:int}/value")]
-    public async Task<IActionResult> GetPortfolioValue(int id)
+    // [HttpGet("{id:int}/value")]
+    // public async Task<IActionResult> GetPortfolioValue(int id)
+    // {
+    //     var username = GetUserName();
+    //     
+    //     var portfolio = await _context.Portfolios
+    //         .Include(p=>p.User)
+    //         .Include(p => p.Stocks)
+    //         .FirstOrDefaultAsync(p=>p.Id == id && p.User.UserName == username);
+    //     
+    //     if(portfolio == null)
+    //         return NotFound(new {mesage = "Portfolio not found for this user", id});
+    //
+    //     var fakePrices = new Dictionary<string, double>
+    //     {
+    //         { "AAPL", 170 },
+    //         { "MSFT", 300 },
+    //         { "TSLA", 750 }
+    //     };
+    //
+    //     var stocks = portfolio.Stocks.Select(s => new StockValueDTO
+    //     {
+    //         Id = s.Id,
+    //         Symbol = s.Symbol,
+    //         Quantity = s.Quantity,
+    //         BuyPrice = s.BuyPrice,
+    //         CurrentPrice = fakePrices.ContainsKey(s.Symbol) ? fakePrices[s.Symbol] : s.BuyPrice
+    //     }).ToList();
+    //
+    //     var totalValue = stocks.Sum(s => s.Value);
+    //     return Ok(new PortfolioWithValueDTO()
+    //     {
+    //         Id = portfolio.Id,
+    //         Name = portfolio.Name,
+    //         TotalValue = totalValue,
+    //         Stocks = stocks
+    //     });
+    // }
+
+    [HttpGet("{id}/value")]
+    public async Task<IActionResult> GetPortfolioValue(int id, [FromServices] StockPriceService priceService)
     {
         var username = GetUserName();
-        
         var portfolio = await _context.Portfolios
-            .Include(p=>p.User)
             .Include(p => p.Stocks)
-            .FirstOrDefaultAsync(p=>p.Id == id && p.User.UserName == username);
-        
+            .FirstOrDefaultAsync(p => p.Id == id && p.User.UserName == GetUserName());
         if(portfolio == null)
             return NotFound(new {mesage = "Portfolio not found for this user", id});
 
-        var fakePrices = new Dictionary<string, double>
-        {
-            { "AAPL", 170 },
-            { "MSFT", 300 },
-            { "TSLA", 750 }
-        };
+        decimal totalValue = 0;
 
-        var stocks = portfolio.Stocks.Select(s => new StockValueDTO
+        foreach (var stock in portfolio.Stocks)
         {
-            Id = s.Id,
-            Symbol = s.Symbol,
-            Quantity = s.Quantity,
-            BuyPrice = s.BuyPrice,
-            CurrentPrice = fakePrices.ContainsKey(s.Symbol) ? fakePrices[s.Symbol] : s.BuyPrice
-        }).ToList();
+            var price = await priceService.GetCurrentPrice(stock.Symbol);
 
-        var totalValue = stocks.Sum(s => s.Value);
-        return Ok(new PortfolioWithValueDTO()
+            if (price.HasValue)
+            {
+                totalValue += price.Value * (decimal)stock.Quantity;
+            }
+        }
+
+        return Ok(new
         {
-            Id = portfolio.Id,
-            Name = portfolio.Name,
-            TotalValue = totalValue,
-            Stocks = stocks
+            PortfolioId = portfolio.Id,
+            PortfolioName = portfolio.Name,
+            TotalValue = totalValue
         });
     }
 
