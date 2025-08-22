@@ -88,6 +88,45 @@ public class PortfolioController : ControllerBase
         return Ok(dto);
     }
 
+    [HttpGet("{id:int}/value")]
+    public async Task<IActionResult> GetPortfolioValue(int id)
+    {
+        var username = GetUserName();
+        
+        var portfolio = await _context.Portfolios
+            .Include(p=>p.User)
+            .Include(p => p.Stocks)
+            .FirstOrDefaultAsync(p=>p.Id == id && p.User.UserName == username);
+        
+        if(portfolio == null)
+            return NotFound(new {mesage = "Portfolio not found for this user", id});
+
+        var fakePrices = new Dictionary<string, double>
+        {
+            { "AAPL", 170 },
+            { "MSFT", 300 },
+            { "TSLA", 750 }
+        };
+
+        var stocks = portfolio.Stocks.Select(s => new StockValueDTO
+        {
+            Id = s.Id,
+            Symbol = s.Symbol,
+            Quantity = s.Quantity,
+            BuyPrice = s.BuyPrice,
+            CurrentPrice = fakePrices.ContainsKey(s.Symbol) ? fakePrices[s.Symbol] : s.BuyPrice
+        }).ToList();
+
+        var totalValue = stocks.Sum(s => s.Value);
+        return Ok(new PortfolioWithValueDTO()
+        {
+            Id = portfolio.Id,
+            Name = portfolio.Name,
+            TotalValue = totalValue,
+            Stocks = stocks
+        });
+    }
+
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdatePortfolio(int id, CreatePortfolioDTO dto)
     {
