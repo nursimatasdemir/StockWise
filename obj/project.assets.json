@@ -4271,11 +4271,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise.csproj",
+      "projectUniqueName": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise/StockWise.csproj",
       "projectName": "StockWise",
-      "projectPath": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise.csproj",
+      "projectPath": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise/StockWise.csproj",
       "packagesPath": "/Users/nursimatasdemir/.nuget/packages/",
-      "outputPath": "/Users/nursimatasdemir/RiderProjects/StockWise/obj/",
+      "outputPath": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/nursimatasdemir/.nuget/NuGet/NuGet.Config"

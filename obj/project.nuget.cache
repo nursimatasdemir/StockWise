@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y2RpMpgcbP8=",
+  "dgSpecHash": "pPPloF/DqFU=",
   "success": true,
-  "projectFilePath": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise.csproj",
+  "projectFilePath": "/Users/nursimatasdemir/RiderProjects/StockWise/StockWise/StockWise.csproj",
   "expectedPackageFiles": [
     "/Users/nursimatasdemir/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/nursimatasdemir/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -139,6 +139,7 @@ public class PortfolioController : ControllerBase
             return NotFound(new {mesage = "Portfolio not found for this user", id});
 
         decimal totalValue = 0;
+        var stockDetails = new List<object>();
 
         foreach (var stock in portfolio.Stocks)
         {
@@ -146,7 +147,16 @@ public class PortfolioController : ControllerBase
 
             if (price.HasValue)
             {
-                totalValue += price.Value * (decimal)stock.Quantity;
+                var stockValue = price.Value * (decimal)stock.Quantity;
+                totalValue += stockValue;
+
+                stockDetails.Add(new
+                {
+                    Symbol = stock.Symbol,
+                    Quantity = stock.Quantity,
+                    CurrentPrice = price.Value,
+                    TotalValue = stockValue
+                });
             }
         }
 
@@ -154,7 +164,8 @@ public class PortfolioController : ControllerBase
         {
             PortfolioId = portfolio.Id,
             PortfolioName = portfolio.Name,
-            TotalValue = totalValue
+            TotalValue = totalValue,
+            Stocks = stockDetails
         });
     }
 
