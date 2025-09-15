@@ -56,6 +56,14 @@ public class AuthController : ControllerBase
         
         return Ok(new {token});
     }
+    
+    [HttpOptions("login")]
+    public IActionResult HandleOptions()
+    {
+        // The CORS middleware will handle the necessary headers.
+        // We just need to ensure the routing system returns a successful response.
+        return Ok();
+    }
 
     [Authorize]
     [HttpGet("user")]

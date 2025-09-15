@@ -18,6 +18,19 @@ if (string.IsNullOrEmpty(jwtKey))
     throw new InvalidOperationException("jwtKey 'Jwt:Key' is not configured.");
 }
 
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(myAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 builder.Services.AddControllers();
 
 // Add services to the container.
@@ -80,10 +93,7 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 app.UseRouting();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
+app.UseCors(myAllowSpecificOrigins);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -91,5 +101,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapControllers();
+ app.UseAuthentication();
+ app.UseAuthorization();
+
+ app.MapControllers();
 app.Run();

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using SQLitePCL;
 using StockWise.DTOs.Portfolio;
+using StockWise.DTOs.Stock;
 using StockWise.Services;
 
 namespace StockWise.Controllers;
@@ -139,7 +140,7 @@ public class PortfolioController : ControllerBase
             return NotFound(new {mesage = "Portfolio not found for this user", id});
 
         decimal totalValue = 0;
-        var stockDetails = new List<object>();
+        var stockDetails = new List<StockDetailDTO>();
 
         foreach (var stock in portfolio.Stocks)
         {
@@ -150,17 +151,17 @@ public class PortfolioController : ControllerBase
                 var stockValue = price.Value * (decimal)stock.Quantity;
                 totalValue += stockValue;
 
-                stockDetails.Add(new
+                stockDetails.Add(new StockDetailDTO
                 {
                     Symbol = stock.Symbol,
-                    Quantity = stock.Quantity,
+                    Quantity = (int) stock.Quantity,
                     CurrentPrice = price.Value,
                     TotalValue = stockValue
                 });
             }
         }
 
-        return Ok(new
+        return Ok(new PortfolioDetailDTO
         {
             PortfolioId = portfolio.Id,
             PortfolioName = portfolio.Name,
