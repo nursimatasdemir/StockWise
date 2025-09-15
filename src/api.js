@@ -12,4 +12,8 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
+export const getPortfolios = () => api.get("/portfolio");
+
+export const getPortfolioDetails = (id) => api.get(`/portfolio/${id}/value`);
+
 export default api;
