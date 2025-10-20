@@ -16,4 +16,6 @@ export const getPortfolios = () => api.get("/portfolio");
 
 export const getPortfolioDetails = (id) => api.get(`/portfolio/${id}/value`);
 
+export const createPortfolio = (portfolioData) => api.post('/portfolio', portfolioData);
+
 export default api;
