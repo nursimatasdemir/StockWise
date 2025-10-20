@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import api from "./api";
-import { ReactComponent as Logo } from './logo.svg'; // Projenin kendi SVG logosunu kullanabiliriz
 
 function Login({ onLogin }) {
     const [username, setUsername] = useState("");
@@ -50,75 +49,67 @@ function Login({ onLogin }) {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
-            <div className="p-8 space-y-8 bg-white rounded-lg shadow-md border-2 border-dashed border-gray-300">
-                <div className="text-center">
-                    <div className="flex justify-center items-center mb-4">
-                        <span className="text-2xl font-semibold ml-2 text-gray-800">StockWise</span>
-                    </div>
-                    <h2 className="text-2xl font-bold text-gray-900">
-                        Sign in to your account
-                    </h2>
-                </div>
+        <div className="flex flex-col items-center justify-center min-h-screen text-gray-800 bg-skyy-300" style={{ backgroundColor: "white" }}>
+            
+            <header className="absolute top-0 mt-4">
+                <h1 className="text-xl font-semibold">StockWise</h1>
+            </header>
+
+            <main className="w-full max-w-xs text-center">
+                <h2 className="text-4xl font-bold mb-8">
+                    Sign in to your account
+                </h2>
                 
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                    <div className="relative">
-                        <label htmlFor="username" className="text-sm font-medium text-gray-700">
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="username" className="block text-xl font-medium mb-2">
                             Username
                         </label>
-                        <div className="relative mt-1">
-                            <input
-                                id="username"
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                placeholder="Enter your username"
-                            />
-                        </div>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-500"
+                            placeholder="Enter your username"
+                        />
                     </div>
-
-                
-                    <div className="relative">
-                        <label htmlFor="password-input" className="text-sm font-medium text-gray-700">
+                    
+                    <div>
+                        <label htmlFor="password-input" className="block text-xl font-medium mb-2">
                             Password
                         </label>
-                        <div className="relative mt-1">
-                            <input
-                                id="password-input"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                placeholder="Enter your password"
-                            />
-                        </div>
+                        <input
+                            id="password-input"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-500"
+                            placeholder="Enter your password"
+                        />
                     </div>
-
-                    {/* Hata Mesajı Alanı */}
-                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-
-                    {/* Giriş Butonu */}
-                    <div>
+                    
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
+                    
+                    <div className="pt-2">
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400"
+                            className="w-full py-2 px-4 border border-gray-300 rounded-md shadow-sm text-lg font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:bg-gray-200"
                         >
                             {isLoading ? "Signing in..." : "Sign in"}
                         </button>
                     </div>
-
-                    {/* Şifremi Unuttum Linki */}
-                    <div className="text-sm text-center">
-                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                    
+                    <div className="pt-1">
+                        <a href="#" className="font-medium text-purple-600 hover:text-purple-500">
                             Forgot password?
                         </a>
                     </div>
                 </form>
-            </div>
+            </main>
         </div>
     );
 }
